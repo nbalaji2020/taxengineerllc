@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Warriors LLC - Home</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background: linear-gradient(90deg, #0E0E0E 0%, #141414 100%);
+        }
+
+        .top-header {
+            background-color: #fffdd0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 16px 25px;
+            border-bottom: 1px solid #eee;
+            gap: 16px;
+            flex-wrap: wrap;
+            min-height: 96px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #000;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: rgba(255, 253, 208, 0.88);
+        }
+
+	        .logo img {
+	            height: 80px;
+	            width: auto;
+	        }
+
+        .main-nav {
+            background: #3a2f14;
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            padding: 12px 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-nav a,
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            padding-bottom: 6px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .main-nav a.active,
+        .main-nav a:hover,
+        .dropdown:hover > .nav-link,
+        .dropdown.active > .nav-link {
+            color: #c8a24a;
+        }
+
+        .main-nav a.active::after,
+        .dropdown.active > .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: #c8a24a;
+            border-radius: 2px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            height: 16px;
+        }
+
+        .dropdown-menu,
+        .submenu {
+            display: none;
+            position: absolute;
+            background: #0b0b0b;
+            min-width: 220px;
+            border-radius: 10px;
+            padding: 10px 0;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        .dropdown-menu {
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+        }
+
+        .submenu {
+            top: -10px;
+            left: 100%;
+            margin-left: 8px;
+        }
+
+        .submenu-item::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 16px;
+            height: 100%;
+        }
+
+        .dropdown:hover > .dropdown-menu,
+        .submenu-item:hover > .submenu {
+            display: block;
+        }
+
+        .dropdown-menu a,
+        .submenu-label,
+        .submenu a {
+            display: block;
+            padding: 10px 18px;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .submenu-item {
+            position: relative;
+        }
+
+        .submenu-label::after {
+            content: "\203A";
+            float: right;
+            margin-left: 16px;
+        }
+
+        .dropdown-menu a:hover,
+        .submenu-label:hover,
+        .submenu a:hover {
+            background: #161618;
+            color: #c8a24a;
+        }
+
+        .hero {
+            padding: 54px 24px 0;
+            text-align: center;
+            background: linear-gradient(90deg, #0E0E0E 0%, #141414 100%);
+        }
+
+        .home-panel {
+            max-width: none;
+            margin: 0;
+            background: transparent;
+            color: #ffffff;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            border: 0;
+        }
+
+        .hero-header {
+            max-width: 1100px;
+            margin: 0 auto 22px;
+            display: grid;
+            gap: 14px;
+            justify-items: center;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 46px;
+            color: #c8a24a;
+            max-width: 760px;
+        }
+
+        .hero-tagline {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 650;
+            letter-spacing: 0.2px;
+            color: #ffffff;
+            max-width: 780px;
+        }
+
+        .carousel {
+            position: relative;
+            margin: 0;
+        }
+
+        .carousel-viewport {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 18px;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+            background: #0b0b0b;
+            height: 50vh;
+            min-height: 360px;
+            max-height: 560px;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+
+        .carousel-viewport::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-slide {
+            scroll-snap-align: start;
+            min-width: 100%;
+            position: relative;
+            padding: 28px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .carousel-slide::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(800px 360px at 20% 20%, rgba(200, 162, 74, 0.22), transparent 70%),
+                linear-gradient(90deg, rgba(15, 15, 16, 0.80) 0%, rgba(15, 15, 16, 0.55) 55%, rgba(15, 15, 16, 0.82) 100%);
+        }
+
+        .slide-clarity {
+            background-image: linear-gradient(135deg, rgba(200, 162, 74, 0.14), rgba(15, 15, 16, 0.10)),
+                url("Image 1 - Carousel.jpg");
+        }
+
+        .slide-discipline {
+            background-image: linear-gradient(135deg, rgba(200, 162, 74, 0.14), rgba(15, 15, 16, 0.10)),
+                url("Image 2 - Carousel.jpg");
+        }
+
+        .slide-growth {
+            background-image: linear-gradient(135deg, rgba(200, 162, 74, 0.14), rgba(15, 15, 16, 0.10)),
+                url("Image 3 - carousel.jpg");
+        }
+
+        .slide-content {
+            position: relative;
+            max-width: 760px;
+            padding: 22px 22px 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(200, 162, 74, 0.35);
+            background: rgba(15, 15, 16, 0.50);
+            backdrop-filter: blur(8px);
+            text-align: center;
+        }
+
+        .slide-content h2 {
+            margin: 0 0 10px;
+            color: #c8a24a;
+            font-size: 28px;
+        }
+
+        .slide-content p {
+            margin: 0 0 10px;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+
+        .slide-content p:last-child {
+            margin-bottom: 0;
+            color: #c8a24a;
+            font-weight: 700;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.30);
+            background: rgba(0, 0, 0, 0.42);
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            user-select: none;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(0, 0, 0, 0.56);
+            border-color: rgba(255, 255, 255, 0.45);
+        }
+
+        .carousel-btn:focus-visible {
+            outline: 3px solid rgba(200, 162, 74, 0.60);
+            outline-offset: 2px;
+        }
+
+        .carousel-btn.prev {
+            left: 12px;
+        }
+
+        .carousel-btn.next {
+            right: 12px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0;
+            padding: 10px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(8px);
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            background: rgba(255, 255, 255, 0.18);
+            cursor: pointer;
+        }
+
+        .carousel-dot[aria-selected="true"] {
+            background: #c8a24a;
+            border-color: #c8a24a;
+        }
+
+        @media (max-width: 740px) {
+            .carousel-viewport {
+                height: 52vh;
+                min-height: 420px;
+            }
+
+            .carousel-slide {
+                padding: 18px 16px;
+            }
+
+            .slide-content h2 {
+                font-size: 24px;
+            }
+
+            .hero h1 { font-size: 36px; }
+            .hero-tagline { font-size: 18px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .carousel-viewport {
+                scroll-behavior: auto;
+            }
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .hero-actions a {
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .hero-actions .primary {
+            background: #c8a24a;
+            color: #ffffff;
+        }
+
+        .hero-actions .secondary {
+            background: transparent;
+            color: #c8a24a;
+            border: 1px solid #c8a24a;
+        }
+
+        .site-footer {
+            background: #fffdd0;
+            color: #000;
+            margin-top: 0;
+            border-top: 1px solid #d8d0aa;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 24px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 28px;
+        }
+
+        .footer-left h3,
+        .footer-right h3 {
+            margin-top: 0;
+            margin-bottom: 14px;
+            font-size: 22px;
+        }
+
+        .footer-left p,
+        .footer-right li,
+        .social-links a {
+            margin: 0 0 10px;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #000000;
+            color: #fffdd0;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .social-links svg {
+            width: 18px;
+            height: 18px;
+            display: block;
+            fill: currentColor;
+        }
+
+        .useful-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .useful-links a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .useful-links a:hover,
+        .social-links a:hover {
+            opacity: 0.85;
+        }
+
+        @media (max-width: 640px) {
+            .top-header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .hero p {
+                margin: 0 auto 28px;
+            }
+
+            .home-panel {
+                padding: 32px 24px;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+	    <header class="top-header">
+	        <div class="logo">
+	            <img src="Logo.jpg" alt="Tax Engineer LLC logo">
+	        </div>
+	    </header>
+
+    <nav class="main-nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="About.html">About us</a>
+        <a href="WhyUs.html">Why us</a>
+        <div class="dropdown">
+            <a href="Services.html" class="nav-link">Services</a>
+            <div class="dropdown-menu">
+                <a href="Services.html#individual-tax">Individual Tax</a>
+                <a href="Services.html#business-tax">Business Tax &amp; Accounting</a>
+                <a href="Services.html#international-tax">International Tax</a>
+            </div>
+        </div>
+        <a href="Pricing.html">Pricing</a>
+        <a href="Contact.html">Contact us</a>
+    </nav>
+
+    <section class="hero">
+        <div class="home-panel">
+            <div class="hero-header">
+                <h1>Take Command of Your Finances</h1>
+                <p class="hero-tagline">Where financial structure meets strategic precision.</p>
+                <div class="hero-actions">
+                    <a class="primary" href="Services.html">Explore Services</a>
+                    <a class="secondary" href="Contact.html">Contact us</a>
+                </div>
+            </div>
+
+            <section class="carousel" aria-label="Financial pillars carousel">
+                <div class="carousel-viewport" id="pillars-carousel" tabindex="0">
+                    <article class="carousel-slide slide-clarity" aria-label="Financial Clarity, Engineered">
+                        <div class="slide-content">
+                            <h2>Financial Clarity, Engineered</h2>
+                            <p>We organize your financial data into clean, accurate systems that eliminate confusion and support better decision-making. Every number is structured with purpose and precision.</p>
+                            <p>Your finances stop being reactive and start becoming intentional.</p>
+                        </div>
+                    </article>
+                    <article class="carousel-slide slide-discipline" aria-label="Year-Round Financial Discipline">
+                        <div class="slide-content">
+                            <h2>Year-Round Financial Discipline</h2>
+                            <p>We stay engaged beyond tax season to keep your books accurate, your records updated, and your compliance consistently maintained.</p>
+                            <p>No last-minute chaos—just continuous financial readiness.</p>
+                        </div>
+                    </article>
+                    <article class="carousel-slide slide-growth" aria-label="Strategic Growth Foundation">
+                        <div class="slide-content">
+                            <h2>Strategic Growth Foundation</h2>
+                            <p>We help you move beyond basic accounting into structured financial strategy that supports long-term stability and smarter growth decisions.</p>
+                            <p>Your financial system becomes an asset, not just a requirement.</p>
+                        </div>
+                    </article>
+                </div>
+                <button class="carousel-btn prev" type="button" aria-label="Previous slide" data-carousel-prev>&lsaquo;</button>
+                <button class="carousel-btn next" type="button" aria-label="Next slide" data-carousel-next>&rsaquo;</button>
+                <div class="carousel-dots" role="tablist" aria-label="Select a slide">
+                    <button class="carousel-dot" type="button" role="tab" aria-label="Go to slide 1" aria-selected="true" data-carousel-dot="0"></button>
+                    <button class="carousel-dot" type="button" role="tab" aria-label="Go to slide 2" aria-selected="false" data-carousel-dot="1"></button>
+                    <button class="carousel-dot" type="button" role="tab" aria-label="Go to slide 3" aria-selected="false" data-carousel-dot="2"></button>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+	                <h3>Tax Engineer LLC</h3>
+	                <p>Email: balaji@taxengineerllc.com</p>
+	                <p>Phone: 470-238-9095</p>
+            </div>
+            <div class="footer-right">
+                <h3>Connect & Useful Links</h3>
+                <div class="social-links">
+	                    <a href="https://www.linkedin.com/company/tax-engineer2026" aria-label="LinkedIn Page" title="LinkedIn Page">in</a>
+                    <a href="#" aria-label="Facebook Page" title="Facebook Page">f</a>
+                    <a href="#" aria-label="YouTube Channel" title="YouTube Channel">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M23.49 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.37.56A3.02 3.02 0 0 0 .51 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .51 5.8 3.02 3.02 0 0 0 2.12 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.37-.56a3.02 3.02 0 0 0 2.12-2.14A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.51-5.8ZM9.75 15.5v-7l6.25 3.5-6.25 3.5Z"/>
+                        </svg>
+                    </a>
+                </div>
+                <ul class="useful-links">
+                    <li><a href="About.html">About us</a></li>
+                    <li><a href="Services.html">Services</a></li>
+                    <li><a href="Pricing.html">Pricing</a></li>
+                    <li><a href="Contact.html">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const viewport = document.getElementById("pillars-carousel");
+            if (!viewport) return;
+
+            const dots = Array.from(document.querySelectorAll("[data-carousel-dot]"));
+            const prevBtn = document.querySelector("[data-carousel-prev]");
+            const nextBtn = document.querySelector("[data-carousel-next]");
+
+            let slideCount = 0;
+            let autoTimer = null;
+            let lastKnownIndex = 0;
+
+            function getSlideWidth() {
+                return viewport.clientWidth || 1;
+            }
+
+            function getIndexFromScroll() {
+                const width = getSlideWidth();
+                return Math.max(0, Math.min(slideCount - 1, Math.round(viewport.scrollLeft / width)));
+            }
+
+            function setActiveDot(index) {
+                dots.forEach((dot, i) => dot.setAttribute("aria-selected", i === index ? "true" : "false"));
+            }
+
+            function scrollToIndex(index, behavior) {
+                const width = getSlideWidth();
+                viewport.scrollTo({ left: index * width, behavior: behavior || (prefersReducedMotion ? "auto" : "smooth") });
+                setActiveDot(index);
+                lastKnownIndex = index;
+            }
+
+            function next() {
+                const idx = getIndexFromScroll();
+                const nextIndex = idx >= slideCount - 1 ? 0 : idx + 1;
+                scrollToIndex(nextIndex);
+            }
+
+            function prev() {
+                const idx = getIndexFromScroll();
+                const prevIndex = idx <= 0 ? slideCount - 1 : idx - 1;
+                scrollToIndex(prevIndex);
+            }
+
+            function stopAuto() {
+                if (autoTimer) window.clearInterval(autoTimer);
+                autoTimer = null;
+            }
+
+            function startAuto() {
+                if (prefersReducedMotion) return;
+                stopAuto();
+                autoTimer = window.setInterval(next, 6500);
+            }
+
+            function init() {
+                slideCount = viewport.querySelectorAll(".carousel-slide").length;
+                setActiveDot(0);
+                startAuto();
+            }
+
+            viewport.addEventListener("scroll", function () {
+                const idx = getIndexFromScroll();
+                if (idx !== lastKnownIndex) {
+                    lastKnownIndex = idx;
+                    setActiveDot(idx);
+                }
+            }, { passive: true });
+
+            viewport.addEventListener("pointerdown", stopAuto, { passive: true });
+            viewport.addEventListener("pointerup", startAuto, { passive: true });
+            viewport.addEventListener("mouseenter", stopAuto);
+            viewport.addEventListener("mouseleave", startAuto);
+            viewport.addEventListener("focusin", stopAuto);
+            viewport.addEventListener("focusout", startAuto);
+
+            viewport.addEventListener("keydown", function (e) {
+                if (e.key === "ArrowRight") {
+                    e.preventDefault();
+                    stopAuto();
+                    next();
+                    startAuto();
+                } else if (e.key === "ArrowLeft") {
+                    e.preventDefault();
+                    stopAuto();
+                    prev();
+                    startAuto();
+                } else if (e.key === "Home") {
+                    e.preventDefault();
+                    stopAuto();
+                    scrollToIndex(0);
+                    startAuto();
+                } else if (e.key === "End") {
+                    e.preventDefault();
+                    stopAuto();
+                    scrollToIndex(slideCount - 1);
+                    startAuto();
+                }
+            });
+
+            if (nextBtn) nextBtn.addEventListener("click", function () { stopAuto(); next(); startAuto(); });
+            if (prevBtn) prevBtn.addEventListener("click", function () { stopAuto(); prev(); startAuto(); });
+
+            dots.forEach((dot) => {
+                dot.addEventListener("click", function () {
+                    const idx = Number(dot.getAttribute("data-carousel-dot"));
+                    if (!Number.isFinite(idx)) return;
+                    stopAuto();
+                    scrollToIndex(idx);
+                    startAuto();
+                });
+            });
+
+            window.addEventListener("resize", function () {
+                scrollToIndex(getIndexFromScroll(), prefersReducedMotion ? "auto" : "smooth");
+            });
+
+            init();
+        })();
+    </script>
+</body>
+</html>

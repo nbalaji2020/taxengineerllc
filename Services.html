@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Tax Warriors LLC</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #eaeaea;
+            background: linear-gradient(90deg, #0E0E0E 0%, #141414 100%);
+        }
+
+        .top-header {
+            background-color: #fffdd0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 16px 25px;
+            border-bottom: 1px solid #eee;
+            gap: 16px;
+            flex-wrap: wrap;
+            min-height: 96px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #000;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: rgba(255, 253, 208, 0.88);
+        }
+
+	        .logo img {
+	            height: 80px;
+	            width: auto;
+	        }
+
+        .main-nav {
+            background: #3a2f14;
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            padding: 12px 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-nav a,
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            padding-bottom: 6px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .main-nav a.active,
+        .main-nav a:hover,
+        .dropdown:hover > .nav-link,
+        .dropdown.active > .nav-link {
+            color: #c8a24a;
+        }
+
+        .main-nav a.active::after,
+        .dropdown.active > .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: #c8a24a;
+            border-radius: 2px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            height: 16px;
+        }
+
+        .dropdown-menu,
+        .submenu {
+            display: none;
+            position: absolute;
+            background: #0b0b0b;
+            min-width: 220px;
+            border-radius: 10px;
+            padding: 10px 0;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        .dropdown-menu {
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+        }
+
+        .submenu {
+            top: -10px;
+            left: 100%;
+            margin-left: 8px;
+        }
+
+        .submenu-item::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 16px;
+            height: 100%;
+        }
+
+        .dropdown:hover > .dropdown-menu,
+        .submenu-item:hover > .submenu {
+            display: block;
+        }
+
+        .dropdown-menu a,
+        .submenu-label,
+        .submenu a {
+            display: block;
+            padding: 10px 18px;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .submenu-item {
+            position: relative;
+        }
+
+        .submenu-label::after {
+            content: "\203A";
+            float: right;
+            margin-left: 16px;
+        }
+
+        .dropdown-menu a:hover,
+        .submenu-label:hover,
+        .submenu a:hover {
+            background: #161618;
+            color: #c8a24a;
+        }
+
+        .content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 48px 24px 60px;
+        }
+
+        .content h1 {
+            color: #c8a24a;
+            margin-top: 0;
+        }
+
+        .service-sections {
+            margin-top: 0;
+            display: grid;
+            gap: 24px;
+        }
+
+        .service-section {
+            scroll-margin-top: 24px;
+        }
+
+        .box {
+            background: #161618;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 24px 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            line-height: 1.8;
+        }
+
+        .box h2,
+        .box h3 {
+            color: #c8a24a;
+            margin-top: 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 0 0 10px;
+        }
+
+        .back-to-top {
+            color: #c8a24a;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-to-top:hover {
+            text-decoration: underline;
+        }
+
+        .site-footer {
+            background: #fffdd0;
+            color: #000;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 24px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 28px;
+        }
+
+        .footer-left h3,
+        .footer-right h3 {
+            margin-top: 0;
+            margin-bottom: 14px;
+            font-size: 22px;
+        }
+
+        .footer-left p,
+        .footer-right li,
+        .social-links a {
+            margin: 0 0 10px;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            color: #fffdd0;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .social-links svg {
+            width: 18px;
+            height: 18px;
+            display: block;
+            fill: currentColor;
+        }
+
+        .useful-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .useful-links a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            .top-header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+	    <header class="top-header">
+	        <div class="logo">
+	            <img src="Logo.jpg" alt="Tax Engineer LLC logo">
+	        </div>
+	    </header>
+
+    <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="About.html">About us</a>
+        <a href="WhyUs.html">Why us</a>
+        <div class="dropdown active">
+            <a href="Services.html" class="nav-link">Services</a>
+            <div class="dropdown-menu">
+                <a href="Services.html#individual-tax">Individual Tax</a>
+                <a href="Services.html#business-tax">Business Tax &amp; Accounting</a>
+                <a href="Services.html#international-tax">International Tax</a>
+            </div>
+        </div>
+        <a href="Pricing.html">Pricing</a>
+        <a href="Contact.html">Contact us</a>
+    </nav>
+
+    <main class="content">
+        <h1 id="top">Services</h1>
+        <div class="service-sections">
+            <section class="service-section" id="individual-tax">
+                <div class="box">
+                    <div class="section-header">
+                        <h2>Individual Tax</h2>
+                        <a class="back-to-top" href="#top">Back to top</a>
+                    </div>
+                    <h3>Tax Filing &amp; Preparation</h3>
+                    <p>Accurate, compliant tax filing tailored to your income, deductions, and financial situation. We ensure every detail is optimized so you file with confidence and clarity.</p>
+                    <p>No guesswork—just precise, reliable returns.</p>
+
+                    <h3>IRS Notices &amp; Resolution</h3>
+                    <p>Received a notice from the IRS? We review, respond, and resolve issues with a structured and professional approach.</p>
+                    <p>Clear guidance, timely action, and complete peace of mind.</p>
+
+                    <h3>Tax Planning &amp; Optimization</h3>
+                    <p>We go beyond filing to help you plan ahead, reduce liabilities, and make smarter financial decisions throughout the year.</p>
+                    <p>Proactive strategies designed to keep more of what you earn.</p>
+
+                    <h3>Freelancers &amp; Self-Employed Support</h3>
+                    <p>From quarterly taxes to expense tracking, we bring structure and discipline to independent income.</p>
+                    <p>Simple systems that keep your finances organized and stress-free.</p>
+                </div>
+            </section>
+
+            <section class="service-section" id="business-tax">
+                <div class="box">
+                    <div class="section-header">
+                        <h2>Business Tax &amp; Accounting</h2>
+                        <a class="back-to-top" href="#top">Back to top</a>
+                    </div>
+                    <h3>Business Tax Filing</h3>
+                    <p>Accurate and compliant tax preparation for LLCs, S-Corps, and small businesses, structured to align with your financials and reporting requirements.</p>
+                    <p>We ensure every filing is precise, timely, and strategically optimized.</p>
+
+                    <h3>Bookkeeping &amp; Financial Records</h3>
+                    <p>We maintain clean, organized books that give you real visibility into your business performance.</p>
+                    <p>Structured records, consistent reporting, and a clear financial foundation you can rely on.</p>
+
+                    <h3>Payroll Management</h3>
+                    <p>Reliable payroll processing with accurate calculations, filings, and compliance handled end-to-end.</p>
+                    <p>Your team gets paid correctly and on time—without complexity or risk.</p>
+
+                    <h3>IRS &amp; State Notice Resolution</h3>
+                    <p>We manage communications, responses, and resolutions for IRS and state notices with a professional, structured approach.</p>
+                    <p>Clear direction, timely handling, and minimal disruption to your business.</p>
+
+                    <h3>Ongoing Compliance &amp; Advisory</h3>
+                    <p>We stay engaged throughout the year to keep your business aligned with tax regulations and financial best practices.</p>
+                    <p>Proactive oversight that supports stability, control, and confident growth.</p>
+                </div>
+            </section>
+
+            <section class="service-section" id="international-tax">
+                <div class="box">
+                    <div class="section-header">
+                        <h2>International Tax</h2>
+                        <a class="back-to-top" href="#top">Back to top</a>
+                    </div>
+                    <h3>International Tax &amp; Cross-Border Compliance</h3>
+                    <p>We help individuals and businesses navigate U.S. and international tax obligations with precision and clarity. From foreign income to multi-country financial exposure, we ensure full compliance while keeping your tax position optimized.</p>
+                    <p>We handle FBAR and FATCA reporting, along with structured support for NRI and expatriate tax situations, including foreign income disclosure and cross-border filing requirements.</p>
+                    <p>Clear guidance. Accurate reporting. Confident global compliance.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <h3>Tax Engineer LLC</h3>
+                <p>Email: balaji@taxengineerllc.com</p>
+                <p>Phone: 470-238-9095</p>
+            </div>
+            <div class="footer-right">
+                <h3>Connect & Useful Links</h3>
+                <div class="social-links">
+	                    <a href="https://www.linkedin.com/company/tax-engineer2026" aria-label="LinkedIn Page" title="LinkedIn Page">in</a>
+                    <a href="#" aria-label="Facebook Page" title="Facebook Page">f</a>
+                    <a href="#" aria-label="YouTube Channel" title="YouTube Channel">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M23.49 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.37.56A3.02 3.02 0 0 0 .51 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .51 5.8 3.02 3.02 0 0 0 2.12 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.37-.56a3.02 3.02 0 0 0 2.12-2.14A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.51-5.8ZM9.75 15.5v-7l6.25 3.5-6.25 3.5Z"/>
+                        </svg>
+                    </a>
+                </div>
+                <ul class="useful-links">
+                    <li><a href="About.html">About us</a></li>
+                    <li><a href="Services.html">Services</a></li>
+                    <li><a href="Pricing.html">Pricing</a></li>
+                    <li><a href="Contact.html">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Us - Tax Warriors LLC</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background: linear-gradient(90deg, #0E0E0E 0%, #141414 100%);
+        }
+
+        .top-header {
+            background-color: #fffdd0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 16px 25px;
+            border-bottom: 1px solid #eee;
+            gap: 16px;
+            flex-wrap: wrap;
+            min-height: 96px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #000;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: rgba(255, 253, 208, 0.88);
+        }
+
+	        .logo img {
+	            height: 80px;
+	            width: auto;
+	        }
+
+        .main-nav {
+            background: #3a2f14;
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            padding: 12px 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-nav a,
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            padding-bottom: 6px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .main-nav a.active,
+        .main-nav a:hover,
+        .dropdown:hover > .nav-link,
+        .dropdown.active > .nav-link {
+            color: #c8a24a;
+        }
+
+        .main-nav a.active::after,
+        .dropdown.active > .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: #c8a24a;
+            border-radius: 2px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            height: 16px;
+        }
+
+        .dropdown-menu,
+        .submenu {
+            display: none;
+            position: absolute;
+            background: #0b0b0b;
+            min-width: 220px;
+            border-radius: 10px;
+            padding: 10px 0;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        .dropdown-menu {
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+        }
+
+        .submenu {
+            top: -10px;
+            left: 100%;
+            margin-left: 8px;
+        }
+
+        .submenu-item::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 16px;
+            height: 100%;
+        }
+
+        .dropdown:hover > .dropdown-menu,
+        .submenu-item:hover > .submenu {
+            display: block;
+        }
+
+        .dropdown-menu a,
+        .submenu-label,
+        .submenu a {
+            display: block;
+            padding: 10px 18px;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .submenu-item {
+            position: relative;
+        }
+
+        .submenu-label::after {
+            content: "\203A";
+            float: right;
+            margin-left: 16px;
+        }
+
+        .dropdown-menu a:hover,
+        .submenu-label:hover,
+        .submenu a:hover {
+            background: #161618;
+            color: #c8a24a;
+        }
+
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 72px 20px;
+        }
+
+        .why-hero {
+            text-align: center;
+            margin: 0 auto 28px;
+            max-width: 900px;
+        }
+
+        .why-hero h1 {
+            margin: 0 0 10px;
+            font-size: 44px;
+            color: #c8a24a;
+            letter-spacing: 0.2px;
+        }
+
+        .why-divider {
+            width: 120px;
+            height: 3px;
+            background: #c8a24a;
+            border-radius: 3px;
+            margin: 14px auto 0;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 18px;
+            margin-top: 34px;
+        }
+
+        .why-card {
+            grid-column: span 6;
+            background: linear-gradient(180deg, rgba(22, 22, 24, 0.92), rgba(15, 15, 16, 0.92));
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 22px 22px;
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.26);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-card::before {
+            content: "";
+            position: absolute;
+            inset: -80px -120px auto auto;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle at 30% 30%, rgba(200, 162, 74, 0.25), transparent 65%);
+            pointer-events: none;
+        }
+
+        .why-card p {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #ffffff;
+        }
+
+        .why-card strong {
+            color: #c8a24a;
+            font-weight: 800;
+        }
+
+        @media (max-width: 860px) {
+            .why-card {
+                grid-column: span 12;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .content {
+                padding: 54px 18px;
+            }
+
+            .why-hero h1 {
+                font-size: 34px;
+            }
+
+            .why-card p {
+                font-size: 17px;
+            }
+        }
+
+        .site-footer {
+            background: #fffdd0;
+            color: #000;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 24px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 28px;
+        }
+
+        .footer-left h3,
+        .footer-right h3 {
+            margin-top: 0;
+            margin-bottom: 14px;
+            font-size: 22px;
+        }
+
+        .footer-left p,
+        .footer-right li,
+        .social-links a {
+            margin: 0 0 10px;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            color: #fffdd0;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .social-links svg {
+            width: 18px;
+            height: 18px;
+            display: block;
+            fill: currentColor;
+        }
+
+        .useful-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .useful-links a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            .top-header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="top-header">
+    <div class="logo">
+        <img src="Logo.jpg" alt="Tax Engineer LLC logo">
+    </div>
+</header>
+
+<nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="About.html">About us</a>
+    <a href="WhyUs.html" class="active">Why us</a>
+    <div class="dropdown">
+        <a href="Services.html" class="nav-link">Services</a>
+        <div class="dropdown-menu">
+            <a href="Services.html#individual-tax">Individual Tax</a>
+            <a href="Services.html#business-tax">Business Tax &amp; Accounting</a>
+            <a href="Services.html#international-tax">International Tax</a>
+        </div>
+    </div>
+    <a href="Pricing.html">Pricing</a>
+    <a href="Contact.html">Contact us</a>
+</nav>
+
+<main class="content">
+    <section class="why-hero">
+        <h1>Why us</h1>
+        <div class="why-divider"></div>
+    </section>
+
+    <section class="why-grid" aria-label="Why us highlights">
+        <div class="why-card"><p>Structured, system-driven approach to taxes and accounting</p></div>
+        <div class="why-card"><p>Precision-focused execution with compliance at the core</p></div>
+        <div class="why-card"><p>Year-round support beyond tax season deadlines</p></div>
+        <div class="why-card"><p>Built for individuals, businesses, and global tax needs</p></div>
+        <div class="why-card"><p>Clear communication and dependable financial control</p></div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-left">
+            <h3>Tax Engineer LLC</h3>
+	            <p>Email: balaji@taxengineerllc.com</p>
+	            <p>Phone: 470-238-9095</p>
+        </div>
+        <div class="footer-right">
+            <h3>Connect & Useful Links</h3>
+            <div class="social-links">
+	                <a href="https://www.linkedin.com/company/tax-engineer2026" aria-label="LinkedIn Page" title="LinkedIn Page">in</a>
+                <a href="#" aria-label="Facebook Page" title="Facebook Page">f</a>
+                <a href="#" aria-label="YouTube Channel" title="YouTube Channel">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M23.49 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.37.56A3.02 3.02 0 0 0 .51 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .51 5.8 3.02 3.02 0 0 0 2.12 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.37-.56a3.02 3.02 0 0 0 2.12-2.14A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.51-5.8ZM9.75 15.5v-7l6.25 3.5-6.25 3.5Z"/>
+                    </svg>
+                </a>
+            </div>
+            <ul class="useful-links">
+                <li><a href="About.html">About us</a></li>
+                <li><a href="Services.html">Services</a></li>
+                <li><a href="Pricing.html">Pricing</a></li>
+                <li><a href="Contact.html">Contact us</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
